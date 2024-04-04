@@ -1,85 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>How to create a registration form</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-do Task Application</title>
+<style>
+  .hidden {
+    display: none;
+  }
+</style>
 </head>
-<body id="body">
-    <form id="data">
-        <h2>Registration</h2><br>
-        <h3>Personal details</h3>
-        <div class="container">
-            <div class="first-div">
-                <h6>Full Name</h6>
-                <input type="text" placeholder="Enter your name ">
-            </div>
-            <div class="first-div">
-                <h6>Date of Birth</h6>
-                <input type="text" placeholder="Enter birth date ">
-            </div>
-            <div class="first-div">
-                <h6>Email</h6>
-                <input type="email" placeholder="Enter your email ">
-            </div>
-            <div class="first-div">
-                <h6>Mobile Number</h6>
-                <input type="text" placeholder="Enter mobile number ">
-            </div>
-            <div class="first-div">
-                <h6>Gender</h6>
-                <input type="text" placeholder="Enter your gender ">
-            </div>
-            <div class="first-div">
-                <h6>Occupation</h6>
-                <input type="text" placeholder="Enter occupation ">
-            </div>
+<body>
 
-        </div>
-        <h3>Identity details</h3>
-        <div class="container">
+<div id="menu">
+  <button onclick="showAddTask()">Add Task</button>
+  <button onclick="showDeletedTask()">Deleted Task</button>
+  <button onclick="showTaskList()">Task List</button>
+</div>
 
-            <div class="first-div">
-                <h6>ID Type</h6>
-                <input type="text" placeholder="Enter ID type ">
-            </div>
-            <div class="first-div">
-                <h6>ID Number</h6>
-                <input type="text" placeholder="Enter ID Number ">
-            </div>
-            <div class="first-div">
-                <h6>Issue Authority</h6>
-                <input type="text" placeholder="Enter issue department ">
-            </div>
-            <div class="first-div">
-                <h6>Issue Date</h6>
-                <input type="text" placeholder="Enter ID issue date ">
-            </div>
-            <div class="first-div">
-                <h6>Issue State</h6>
-                <input type="text" placeholder="Enter ID issue state ">
-            </div>
-            <div class="first-div">
-                <h6>Expiry Date</h6>
-                <input type="text" placeholder="Enter ID expiry date">
-            </div>
+<div id="addTask" class="hidden">
+  <h2>Add Task</h2>
+  <form id="taskForm">
+    <label for="taskTitle">Task Title:</label><br>
+    <input type="text" id="taskTitle" name="taskTitle"><br>
+    <label for="taskDescription">Task Description:</label><br>
+    <textarea id="taskDescription" name="taskDescription"></textarea><br>
+    <button type="button" onclick="addTask()">Add Task</button>
+  </form>
+</div>
 
-        </div>
+<div id="deletedTask" class="hidden">
+  <h2>Deleted Task</h2>
+  <p>No Task</p>
+</div>
 
-        <button onclick="printpage()" class="btn">Next</button>
-    </form>
-</body>
-<script type="text/javascript">
-   
-    function printpage() {
-        //window.print();
-        var body = document.getElementById('body').innerHTML;
-        var data = document.getElementById('data').innerHTML;
-       // document.getElementById('body').innerHTML = data;
-     window.print();
-        document.getElementById('body').innerHTML = body;
-    }
+<div id="taskList" class="hidden">
+  <h2>Task List</h2>
+  <ul id="tasks">
+    <li>No Task</li>
+  </ul>
+</div>
 
+<script>
+  function showAddTask() {
+    hideAll();
+    document.getElementById("addTask").classList.remove("hidden");
+  }
+
+  function showDeletedTask() {
+    hideAll();
+    document.getElementById("deletedTask").classList.remove("hidden");
+  }
+
+  function showTaskList() {
+    hideAll();
+    document.getElementById("taskList").classList.remove("hidden");
+  }
+
+  function hideAll() {
+    document.getElementById("addTask").classList.add("hidden");
+    document.getElementById("deletedTask").classList.add("hidden");
+    document.getElementById("taskList").classList.add("hidden");
+  }
+
+  function addTask() {
+    var title = document.getElementById("taskTitle").value;
+    var description = document.getElementById("taskDescription").value;
+    var taskList = document.getElementById("tasks");
+    var li = document.createElement("li");
+    li.textContent = title + " - " + description;
+    taskList.appendChild(li);
+    document.getElementById("taskTitle").value = "";
+    document.getElementById("taskDescription").value = "";
+    showTaskList();
+  }
 </script>
+
+</body>
 </html>
